@@ -29,7 +29,7 @@ public class StationsTest {
     public void test1() {
         log.info("Starting test1: ");
         StationApi.getStations();
-        log.info("test1 successful");
+        log.info("test1 successful!");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class StationsTest {
     public void test2() {
         log.info("Starting test2: ");
         StationApi.updateStations(id,line,name);
-        log.info("test2 successful");
+        log.info("test2 successful!");
     }
 }
 
