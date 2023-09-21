@@ -1,40 +1,25 @@
 package rest.dto;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import rest.utils.DateDeserializer;
 
-import java.io.Serializable;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.List;
 
-@JsonAutoDetect
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class StationResponse implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class StationResponse {
+    private List<RouteItemDto> route;
+    private LastStationDto lastStationDto;
+    private int totalTime;
 
-    /**
-     * Идентификатор.
-     */
-    @JsonProperty("id")
-    private String id;
-
-    /**
-     * Линия.
-     */
-    @JsonProperty("line")
-    private String line;
-
-    /**
-     * Станция.
-     */
-    @JsonProperty("name")
-    private String name;
-
-    @Override
-    public String toString() {
-        return String.join(" ", Arrays.asList(name, line));
-    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ")
+    @JsonDeserialize(using = DateDeserializer.class)
+    private LocalDateTime dateTime;
 }
+
+
